@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 5; 
 const router = require('express').Router();
 const {userSignUpValidationSchema,userSignInValidationSchema,userUpdateValidationSchema} = require('../general/zodValidations');
-const {User} = require('../db/index')
+const {User,Account} = require('../db/index')
 const {checkAccountExists, verifyLogin} = require('../general/helper');
 const authMiddleware = require('../middleware');
 
@@ -22,13 +22,18 @@ router.post('/signup',async (req, res) => {
             password: hashedPassword,
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            balance:0
         });
         // Save the user
         const token = jwt.sign({
             username:req.body.username,
             password:hashedPassword
         }, process.env.JWT_SECRET);
+        // Creating new account for user, providing random balance between 1 to 1000 (for now)
+        const newAccount = new Account({
+            userId:newUser._id,
+            balance:Math.random() * (1000 - 1) + 1
+        })
+        await newAccount.save()
         newUser.save()
             .then(() => res.json({message:'User created successfully',jwt:token}))
             .catch(err => res.status(400).json('Error: ' + err));
