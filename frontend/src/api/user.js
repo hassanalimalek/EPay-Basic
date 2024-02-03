@@ -2,21 +2,34 @@ import axiosInstance from './index';
 import Cookies from 'js-cookie';
 
 const signInUser = async (email, password) => {
-    console.log("axios -->",axiosInstance)
-    console.log("import.meta.env.API_BASE_URL, -->",import.meta.env.VITE_API_BASE_URL)
-    // axiosInstance
     try {
         const response = await axiosInstance.post('/user/signin', { username:email, password });
-        console.log("response @@@ sign in", response)
         // Set JWT to a cookie
         Cookies.set('jwt', response.data.jwt); 
-       
+
         return response.data;
-    } catch (error) {
-        console.log("error -->",error.response.data.message)
-        return error;
-   
+    } catch (error) {      
+        throw new Error(error.response.data.message);
     }
 };
 
-export default signInUser;
+const signOutUser = () => {
+    Cookies.remove('jwt');
+};
+
+const getUserBalance = async (userId) => {
+    try {
+        // Add user id to body
+        const response = await axiosInstance.get('/account/balance',{
+            params: {
+                userId: userId  
+              }
+         }
+        )
+        return response.data;
+    } catch (error) {
+        throw new Error(error.response.data.message);
+    }
+};
+
+export {signInUser, signOutUser,getUserBalance};
