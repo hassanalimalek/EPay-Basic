@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { RiSecurePaymentLine } from 'react-icons/ri';
 import { motion } from 'framer-motion';
-
-import { signInUser, signUpUser } from '../../api/user';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { signInUser, signUpUser } from '../../api/user';
 
 const containerVariants = {
   hidden: { opacity: 0 },

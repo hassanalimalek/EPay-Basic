@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { RiSecurePaymentLine } from 'react-icons/ri';
-import { getJWTData } from '../../utils/helper';
-import { FaUserCircle } from 'react-icons/fa';
-import { signOutUser } from '../../api/user';
 import { useNavigate } from 'react-router-dom';
+import { FaUserCircle } from 'react-icons/fa';
+import { getJWTData } from '../../utils/helper';
+import { signOutUser } from '../../api/user';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);

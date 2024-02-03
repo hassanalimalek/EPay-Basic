@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { getUsers } from '../../api/user';
-import TransferModal from '../transferModal';
 import toast from 'react-hot-toast';
 import debounce from 'lodash/debounce';
+import { getUsers } from '../../api/user';
+import TransferModal from '../transferModal';
 
 export default function BalanceTable({ currentUser, getBalance }) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -59,9 +59,9 @@ export default function BalanceTable({ currentUser, getBalance }) {
             >
               <path
                 stroke='currentColor'
-                stroke-linecap='round'
-                stroke-linejoin='round'
-                stroke-width='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth='2'
                 d='m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z'
               />
             </svg>

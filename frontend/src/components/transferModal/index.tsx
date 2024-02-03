@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import { LuArrowBigRightDash } from 'react-icons/lu';
 import { transferFunds } from '../../api/user';
-import toast from 'react-hot-toast';
+
 export default function TransferModal({
   getBalance,
   modalVisible,
