@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { RiSecurePaymentLine } from 'react-icons/ri';
 import { motion } from 'framer-motion';
-import SignUpImg from '../../assets/signupImg.svg';
-import LoginImg from '../../assets/loginImg.svg';
+
 import { signInUser, signUpUser } from '../../api/user';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -253,15 +252,25 @@ function Login() {
       </section>
 
       <div className='flex justify-center items-center w-[0%] md:w-[50%]'>
-        {/* <img className='w-[70%]' src={SignUpImg}></img> */}
-        <motion.img
-          className='w-[70%]'
-          src={SignUpImg}
-          alt='Sign Up'
-          variants={slideInFromRight}
-          initial='hidden'
-          animate='visible'
-        />
+        {pageType === 'login' ? (
+          <motion.img
+            className='w-[70%]'
+            src={'/loginImg.svg'}
+            alt='Sign Up'
+            variants={slideInFromRight}
+            initial='hidden'
+            animate='visible'
+          />
+        ) : (
+          <motion.img
+            className='w-[70%]'
+            src={'/signupImg.svg'}
+            alt='Sign Up'
+            variants={slideInFromRight}
+            initial='hidden'
+            animate='visible'
+          />
+        )}
       </div>
     </div>
   );
