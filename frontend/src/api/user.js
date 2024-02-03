@@ -1,17 +1,32 @@
 import axiosInstance from './index';
 import Cookies from 'js-cookie';
 
-const signInUser = async (email, password) => {
+const signInUser = async (userName, password) => {
+
     try {
-        const response = await axiosInstance.post('/user/signin', { userName:email, password });
+        const response = await axiosInstance.post('/user/signin', { userName, password });
         // Set JWT to a cookie
         Cookies.set('jwt', response.data.jwt); 
 
         return response.data;
     } catch (error) {      
+        console.log("Error-->",error)
         throw new Error(error.response.data.message);
     }
 };
+
+const signUpUser = async (data) => {
+    try {
+        const response = await axiosInstance.post('/user/signup', data);
+        // Set JWT to a cookie
+        Cookies.set('jwt', response.data.jwt); 
+
+        return response.data;
+    } catch (error) {      
+ 
+        throw new Error(error.response.data.message);
+    }
+}
 
 const signOutUser = () => {
     Cookies.remove('jwt');
@@ -57,4 +72,4 @@ const transferFunds = async(data)=>{
     }
 }
 
-export {signInUser, signOutUser,getUserBalance,getUsers,transferFunds};
+export {signInUser, signUpUser,signOutUser,getUserBalance,getUsers,transferFunds};

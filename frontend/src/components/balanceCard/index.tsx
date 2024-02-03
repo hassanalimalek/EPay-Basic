@@ -33,7 +33,7 @@ export default function BalanceCard({ data }) {
             <div className='text-md font-semibold tracking-tight'>Balance</div>
             <div className=' flex items-center gap-4 '>
               <p className='text-xl font-semibold'>
-                {isRevealed ? `$${data?.balance}` : '****'}
+                {isRevealed ? `$${data?.balance?.toFixed(1)}` : '****'}
               </p>
               <button
                 className='inline-block'
