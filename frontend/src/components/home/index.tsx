@@ -6,36 +6,45 @@ import { getUserBalance } from '../../api/user';
 
 export default function Home() {
   let decodedData: any = getJWTData();
-  console.log('decodedData -->', decodedData);
   const [accountData, setAccountData] = useState({
+    id: null,
     firstName: '',
     lastName: '',
-    userName: decodedData?.username,
+    userName: decodedData?.userName,
     balance: 0,
   });
-  console.log('accountData -->', accountData);
+
+  async function getBalance(id) {
+    try {
+      let response: any = await getUserBalance(id);
+      setAccountData({
+        id: decodedData?.id,
+        userName: decodedData?.username,
+        balance: response?.balance,
+        firstName: decodedData?.firstName,
+        lastName: decodedData?.lastName,
+      });
+      return response;
+    } catch (err) {
+      console.log(err);
+    }
+  }
   // Getting user balance
   useEffect(() => {
     (async () => {
       if (decodedData?.id) {
-        let response = await getUserBalance(decodedData?.id);
-        setAccountData({
-          userName: decodedData?.username,
-          balance: response?.balance,
-          firstName: decodedData?.firstName,
-          lastName: decodedData?.lastName,
-        });
+        getBalance(decodedData?.id);
       }
     })();
   }, [decodedData?.id]);
   return (
-    <div className='max-w-screen-2xl m-auto p-4 px-6 border-2 min-h-[85vh] mt-4'>
+    <div className='max-w-screen-2xl m-auto p-4 px-6 border-2 rounded-md min-h-[85vh] mt-4'>
       <div className='mb-6 flex flex-col sm:flex-row  justify-between items-center '>
         <h2 className='mb-6 text-3xl font-bold '>Welcome!</h2>
         <BalanceCard data={accountData} />
       </div>
       <h2 className='mb-6 text-xl font-bold '>Users</h2>
-      <BalanceTable />
+      <BalanceTable currentUser={accountData} getBalance={getBalance} />
     </div>
   );
 }

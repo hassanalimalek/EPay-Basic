@@ -4,7 +4,7 @@ import { FaEye } from 'react-icons/fa';
 import { FaEyeSlash } from 'react-icons/fa6';
 
 export default function BalanceCard({ data }) {
-  const [isRevealed, setIsRevealed] = useState(false);
+  const [isRevealed, setIsRevealed] = useState(true);
   return (
     <div className='bg-gradient-to-tl from-gray-900 to-gray-800 text-white w-full h-56 sm:w-96 max-w-96  p-6 rounded-xl shadow-md'>
       <div className='h-full flex flex-col justify-between'>

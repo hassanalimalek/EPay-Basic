@@ -32,12 +32,12 @@ const slideInFromRight = {
 function Login() {
   const [loading, setLoading] = useState(false);
   const [pageType, setPageType] = useState('login');
-  const [username, setUsername] = useState('');
+  const [userName, setuserName] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(event.target.value);
+  const handleuserNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setuserName(event.target.value);
   };
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,7 +48,7 @@ function Login() {
     event.preventDefault();
     setLoading(true);
     try {
-      await signInUser(username, password);
+      await signInUser(userName, password);
       navigate('/');
     } catch (e) {
       toast.error(e?.message || 'Something went wrong', {
@@ -94,7 +94,7 @@ function Login() {
                       htmlFor='email'
                       className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
                     >
-                      Your username
+                      Your userName
                     </label>
                     <input
                       type='input'
@@ -102,7 +102,7 @@ function Login() {
                       id='email'
                       className='bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
                       placeholder='name@company.com'
-                      onChange={handleUsernameChange}
+                      onChange={handleuserNameChange}
                     />
                   </div>
                   <div>

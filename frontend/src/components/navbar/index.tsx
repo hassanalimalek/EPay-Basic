@@ -47,7 +47,7 @@ export default function Navbar() {
                     {decodedData?.firstName} {decodedData?.lastName}
                   </span>
                   <span className='block text-sm text-gray-900 dark:text-white'>
-                    {decodedData?.username}
+                    {decodedData?.userName}
                   </span>
                 </div>
                 <ul className='py-1' aria-labelledby='user-menu-button'>

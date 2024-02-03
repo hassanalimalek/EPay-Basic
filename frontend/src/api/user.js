@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 
 const signInUser = async (email, password) => {
     try {
-        const response = await axiosInstance.post('/user/signin', { username:email, password });
+        const response = await axiosInstance.post('/user/signin', { userName:email, password });
         // Set JWT to a cookie
         Cookies.set('jwt', response.data.jwt); 
 
@@ -32,4 +32,29 @@ const getUserBalance = async (userId) => {
     }
 };
 
-export {signInUser, signOutUser,getUserBalance};
+const getUsers = async (searchKeyword) => {
+    try {
+        const response = await axiosInstance.get('/user/bulk',{
+            params: {
+                filter: searchKeyword  
+              }
+         }
+        )
+
+        return response.data;
+    } catch (error) {
+        throw new Error(error.response.data.message);
+    }
+}
+
+const transferFunds = async(data)=>{
+    try{
+        await axiosInstance.post('/account/transfer',data)
+        return {message:'Transaction Successful'}
+    }catch(e){
+        console.log("Error--->",e)
+        throw new Error(e.response.data.message)
+    }
+}
+
+export {signInUser, signOutUser,getUserBalance,getUsers,transferFunds};
