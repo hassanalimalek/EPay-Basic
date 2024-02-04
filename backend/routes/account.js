@@ -6,12 +6,13 @@ const router = require('express').Router();
 
 // Get User Balance
 router.get('/balance',authMiddleware,(req,res)=>{
-    if(req.body.userId === undefined){
-        res.status(400).json({message:'Invalid User Id'})
+   
+    if(req.query.userId === undefined || req.query.userId === ''){
+        return res.status(400).json({message:'Invalid User Id'})
     }
-    Account.findOne({userId:req.body.userId})
+    Account.findOne({userId:req.query.userId})
         .then((account)=>{
-            res.json({balance:account.balance})
+           return res.json({balance:account.balance})
         })
         .catch(err => res.status(400).json('Error: ' + err));
 })
@@ -24,7 +25,6 @@ router.post('/transfer',authMiddleware,async (req,res)=>{
    session.startTransaction();
 
    try{ 
-      
         // Fetch Sender and Reciever Account
         let senderAccount = await Account.findOne({userId:req.body.senderId}).session(session)
 
