@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import BalanceCard from '../balanceCard';
-import BalanceTable from '../balanceTable';
+import BalanceCard from '../../components/balanceCard';
+import BalanceTable from '../../components/balanceTable';
 import { getJWTData } from '../../utils/helper';
 import { getUserBalance } from '../../api/user';
 import toast from 'react-hot-toast';
 
 export default function Home() {
   let decodedData: any = getJWTData();
+
   const [currentUser, setCurrentUser] = useState({
     id: null,
     firstName: '',

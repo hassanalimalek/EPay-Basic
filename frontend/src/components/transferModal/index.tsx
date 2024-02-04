@@ -27,6 +27,8 @@ export default function TransferModal({
       toast.success('Funds transferred successfully');
       setModalVisible(false);
       getBalance(currentUser.id);
+      // Resetting form values
+      e.target.reset();
     } catch (e) {
       toast.error(e?.message || 'Failed to transfer funds');
     } finally {

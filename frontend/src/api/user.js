@@ -10,8 +10,8 @@ const signInUser = async (userName, password) => {
 
         return response.data;
     } catch (error) {      
-        console.log("Error-->",error)
-        throw new Error(error.response.data.message);
+     
+        throw new Error(error.message || error.response.data.message);
     }
 };
 
@@ -24,7 +24,7 @@ const signUpUser = async (data) => {
         return response.data;
     } catch (error) {      
  
-        throw new Error(error.response.data.message);
+        throw new Error(error.message || error.response.data.message);
     }
 }
 
@@ -43,7 +43,7 @@ const getUserBalance = async (userId) => {
         )
         return response.data;
     } catch (error) {
-        throw new Error(error.response.data.message);
+        throw new Error(error.message || error.response.data.message);
     }
 };
 
@@ -58,7 +58,7 @@ const getUsers = async (searchKeyword) => {
 
         return response.data;
     } catch (error) {
-        throw new Error(error.response.data.message);
+        throw new Error(error.message || error.response.data.message);
     }
 }
 
@@ -66,9 +66,8 @@ const transferFunds = async(data)=>{
     try{
         await axiosInstance.post('/account/transfer',data)
         return {message:'Transaction Successful'}
-    }catch(e){
-        console.log("Error--->",e)
-        throw new Error(e.response.data.message)
+    }catch(error){
+       throw new Error(error.message || error.response.data.message);
     }
 }
 

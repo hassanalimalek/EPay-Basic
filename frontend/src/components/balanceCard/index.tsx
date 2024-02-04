@@ -9,7 +9,7 @@ export default function BalanceCard({ data }) {
     <div className='bg-gradient-to-tl from-gray-900 to-gray-800 text-white w-full h-56 sm:w-96 max-w-96  p-6 rounded-xl shadow-md'>
       <div className='h-full flex flex-col justify-between'>
         <div className='flex items-start justify-between space-x-4'>
-          <div className=' text-xl font-semibold tracking-tigh'>EPAY</div>
+          <div className=' text-xl font-semibold tracking-tigh'>E-PAY</div>
 
           <div className='inline-flex flex-col items-center justify-center'>
             <RiSecurePaymentLine className='w-9 h-9 mr-2 text-[#6D69FB]' />
