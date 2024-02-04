@@ -8,7 +8,7 @@ mongoose.connect('mongodb+srv://hassanalimalek9:Hassanali0123@cluster0.m4x43wd.m
 
 // Create a user schema
 const userSchema = new mongoose.Schema({
-    username: {
+    userName: {
       type: String,
       required: true,
       unique: true,

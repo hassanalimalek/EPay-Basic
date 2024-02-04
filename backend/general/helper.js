@@ -1,9 +1,9 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-async function checkAccountExists(modal, username) {
+async function checkAccountExists(modal, userName) {
     try {
-        const account = await modal.findOne({ username: username });
+        const account = await modal.findOne({ userName: userName });
         if (account) {
             return true
         } else {
@@ -13,9 +13,9 @@ async function checkAccountExists(modal, username) {
         throw e; // Re-throw the error to be caught by the calling code
     }
 }
-async function verifyLogin(model, username, password) {
+async function verifyLogin(model, userName, password) {
     try {
-        const account = await model.findOne({ username: username });
+        const account = await model.findOne({ userName: userName });
         if (!account) {
             throw new Error('Account not found');
         }
@@ -23,7 +23,7 @@ async function verifyLogin(model, username, password) {
         if (!match) {
             throw new Error('Invalid password');
         }
-        return true;
+        return account;
     } catch (error) {
         console.error(error);
         return {error:error.message};
@@ -38,14 +38,14 @@ async function verifyAuthToken(req, res,next) {
         }
         // Split the Bearer token
         const token = authHeader.split(' ')[1];
-        console.log("token --->",token)
+
         jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
             if (err) {
                 return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
             }
             else{
-                req.username = decoded.username;
-                console.log("decoded @@@",decoded)
+                req.userName = decoded.userName;
+               
                 next()
             }
         });
